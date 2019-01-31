@@ -44,17 +44,36 @@ export class DeliveryForm extends React.Component {
         }
         return Promise.reject(
           new SubmissionError({
-            _error: 'Error submitting message'
+            _error: message
           })
         );
       });
   }
 
   render() {
+    let successMessage;
+    let errorMessage;
+
+    if (this.props.submitSucceeded) {
+      successMessage = (
+        <div className="message message-success">
+          Message submitted successfully.
+        </div>
+      );
+    }
+    if (this.props.error) {
+      errorMessage = (
+        <div className="message message-error">
+          {this.props.error}
+        </div>
+      );
+    }
     return (
       <div className="delivery-form">
         <h2>Report a problem with your delivery</h2>
         <form onSubmit={this.props.handleSubmit((values) => this.onSubmit(values))}>
+        {successMessage}
+        {errorMessage}
           <div>
             <Field
               component={Input}
@@ -76,7 +95,7 @@ export class DeliveryForm extends React.Component {
               <option value="not-delivered">My delivery hasn't arrived</option>
               <option value="wrong-item">The wrong item was delivered</option>
               <option value="missing-part">Part of my order was missing</option>
-              <option value="damage">Some of my order arrived damaged</option>
+              <option value="damaged">Some of my order arrived damaged</option>
               <option value="other">Other (give details below)</option>
             </Field>
           </div>
