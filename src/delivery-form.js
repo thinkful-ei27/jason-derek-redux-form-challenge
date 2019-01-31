@@ -1,7 +1,7 @@
 import React from 'react';
 import './delivery-form.css';
 import { reduxForm, Field } from 'redux-form';
-import { required } from './validators';
+import { required, trackingLength, mustBeNumber } from './validators';
 import Input from './components/input';
 
 export function DeliveryForm(props) {
@@ -14,7 +14,7 @@ export function DeliveryForm(props) {
             component={Input} 
             element="input" 
             label="Tracking Number"
-            validate={required} 
+            validate={[required, trackingLength, mustBeNumber]} 
             type="text" 
             name="trackingNumber" 
             id="trackingNumber" />
