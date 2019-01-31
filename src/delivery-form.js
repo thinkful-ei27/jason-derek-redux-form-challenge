@@ -1,7 +1,8 @@
 import React from 'react';
 import './delivery-form.css';
+import { reduxForm } from 'redux-form';
 
-export default function DeliveryForm(props) {
+export function DeliveryForm(props) {
   return (
     <div class="delivery-form">
       <h2>Report a problem with your delivery</h2>
@@ -29,3 +30,7 @@ export default function DeliveryForm(props) {
     </div>
   );
 };
+
+export default reduxForm({
+  form: 'delivery-form'
+})(DeliveryForm);
