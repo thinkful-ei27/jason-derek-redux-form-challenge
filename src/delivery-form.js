@@ -1,19 +1,21 @@
 import React from 'react';
 import './delivery-form.css';
 import { reduxForm, Field } from 'redux-form';
+import { required } from './validators';
+import Input from './components/input';
 
 export function DeliveryForm(props) {
   return (
     <div className="delivery-form">
       <h2>Report a problem with your delivery</h2>
-      <form>
+      <form onSubmit={props.handleSubmit((values)=>console.log(values))}>
         <div>
           <label htmlFor="trackingNumber">Tracking Number</label>
-          <Field component="input" type="text" name="trackingNumber" id="trackingNumber" />
+          <Field component={Input} validate={required} type="text" name="trackingNumber" id="trackingNumber" />
         </div>
         <div>
           <label htmlFor="issue">What is your issue?</label>
-          <Field component="select" name="issue" id="issue">
+          <Field component="select" validate={required} name="issue" id="issue">
             <option value="not-delivered">My delivery hasn't arrived</option>
             <option value="wrong-item">The wrong item was delivered</option>
             <option value="missing-part">Part of my order was missing</option>
